@@ -1,7 +1,9 @@
 export function filterMovies(movies, query){
+    console.log(query);
+    
     if (!query){
         return movies
     }
     const lower =query.toLowerCase()
-    return movies.filter((movie)=> movie.title.toLowerCase().includes(lower)|| movie.gener.join(" ").includes(lower) ) 
+    return movies.filter((movie)=> movie.Title.toLowerCase().includes(lower)|| movie.Genre.includes(lower) ) 
 }

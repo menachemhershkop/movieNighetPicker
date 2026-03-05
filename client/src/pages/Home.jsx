@@ -8,11 +8,13 @@ import MovieCard from '../components/MovieCard';
 import { data } from 'react-router';
 
 function Home() {
-    const {isLoading, error, searchQuery, setMovies, setLoading, setError}= useMovieStore()
-    const movie = useMovieStore(state => state.movie)
+    const {movie, isLoading, error, searchQuery, setMovies, setLoading, setError}= useMovieStore()
+    // const movie = useMovieStore(state => state.movie)
     // const movies = getMovies()
-    // console.log(movies);
+
     const debouncedQuery = useDebondes(searchQuery)
+
+    
     useEffect(() => {
           fetch('http://localhost:3000/api/movie')
           .then((response) => {
@@ -40,7 +42,6 @@ function Home() {
       <SearchBar/>
        <div className='list'>
         {filtered.map((movie) => {
-          console.log(movie);
           
           return (
             <div key={movie.imdbID}>

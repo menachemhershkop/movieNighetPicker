@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 function MovieCard({movie}) {
-  console.log(123,movie);
   
   return (
     <div>

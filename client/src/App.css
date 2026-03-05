@@ -19,3 +19,27 @@
 .card p{
     padding: 0 10px 10px;
 }
+.detalis{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 10px;
+}
+.detalis img{
+    width: 100%;
+    border-radius: 10px;
+}
+.detalis button{
+    background: #1e4fd1;
+}
+.seat-grid{
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 12px;
+}   
+.seat.selected{
+    background: lightcoral;
+}
+.seat.available{
+    background: lightcyan;
+}
