@@ -2,11 +2,17 @@ import React, { useEffect } from 'react'
 import { useMovieStore } from '../store/movieStore'
 import { getMovies } from '../api/movie'
 import SearchBar from '../components/SearchBar';
+import { filterMovies } from '../utils/filterMovies';
+import useDebondes from '../hooks/useDebondes';
+import MovieCard from '../components/MovieCard';
+import { data } from 'react-router';
 
 function Home() {
-    const {movie,isLoading, error, searchQuery, setMovies, setLoading, setError}= useMovieStore()
+    const {isLoading, error, searchQuery, setMovies, setLoading, setError}= useMovieStore()
+    const movie = useMovieStore(state => state.movie)
     // const movies = getMovies()
     // console.log(movies);
+    const debouncedQuery = useDebondes(searchQuery)
     useEffect(() => {
           fetch('http://localhost:3000/api/movie')
           .then((response) => {
@@ -16,21 +22,32 @@ function Home() {
               return response.json();
           })
               .then((data) => {
-                console.log(data);
-              setLoading(true);
+                setMovies(data)
+                
+                setLoading(true);
               })
               .catch((error) => {
-              setError(error);
-              setLoading(false);
-          });
-      }, []);
-
-      if (isLoading) return <p>Loading...</p>
-      if (error) return <p>{error}</p>
-  return (
-    <div>
+                setError(error);
+                setLoading(false);
+              });
+            }, []);
+            const filtered = filterMovies(movie, debouncedQuery)
+            if (isLoading) return <p>Loading...</p>
+            if (error) return <p>{error}</p>
+            
+            return (
+              <div>
       <SearchBar/>
-       <div className=''></div>
+       <div className='list'>
+        {filtered.map((movie) => {
+          console.log(movie);
+          
+          return (
+            <div key={movie.imdbID}>
+          <MovieCard  movie={movie}/>
+          </div>
+        )})}
+       </div>
     </div>
   )
 }

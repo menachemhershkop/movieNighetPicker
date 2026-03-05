@@ -6,7 +6,7 @@ export const useMovieStore = create((set)=>({
     error:null,
     searchQuery:"",
     seatSelections:{},
-    setMovies:(movies)=>set({movies}),
+    setMovies: (movies) => set({ movie: movies }),
     setSearchQuery:(value)=>set({searchQuery:value}),
     setLoading: (boolean)=>set({setLoading:boolean}), 
     setError:(message)=>set({Error:message}),

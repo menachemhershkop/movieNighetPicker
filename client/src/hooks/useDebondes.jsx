@@ -1,22 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-function useDebondes() {
+function useDebondes(value, delay=500) {
 
 
     const [deb, setDeb] = useState(value);
     let timer;
-    function back(e){
-        clearTimeout(timer);
-        timer = setTimeout(()=>{
-            console.log(123);
-            
-            setDeb(e)
-        }, delayMs);
-
+    useEffect(()=>{
+     timer = setTimeout(()=>{
+            setDeb=(value)
+        }, delay)
+        return ()=> clearTimeout(timer)
+    }, [value,delay])
+    return deb
 }
-    return  {deb, back}
 
-};
+
 
 
 export default useDebondes
