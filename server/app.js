@@ -9,8 +9,8 @@ app.use(express.json());
 
 
 
-app.get('/api/movie',(res, req)=>{
-    req.send(movie)
+app.get('/api/movie',(req, res)=>{
+    res.json(movie)
 })
 
 
